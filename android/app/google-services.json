@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "173968297094",
+    "project_id": "battlelingual",
+    "storage_bucket": "battlelingual.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:173968297094:android:2195e9d134ce3651109507",
+        "android_client_info": {
+          "package_name": "com.example.battlelingual"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7YA5tTH-lN4GqnsHymuCxEqcxwOIYipc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
