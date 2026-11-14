@@ -1,3 +1,5 @@
+import 'package:battlelingual/screens/lobby_screen.dart';
+import 'package:battlelingual/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:battlelingual/core/app_routes.dart';
 import 'package:battlelingual/core/app_theme.dart';
@@ -13,6 +15,8 @@ class BattleLingualApp extends StatelessWidget{
       initialRoute: AppRoutes.splashScreen,
       routes: {
         AppRoutes.splashScreen:(context) => SplashScreen(),
+        AppRoutes.signInScreen:(context) => SignInScreen(),
+        AppRoutes.lobbyScreen:(context) => LobbyScreen(),
       },
     );
   }

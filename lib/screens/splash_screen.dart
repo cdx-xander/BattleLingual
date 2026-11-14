@@ -1,3 +1,4 @@
+import 'package:battlelingual/core/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:battlelingual/core/app_color.dart';
 
@@ -33,7 +34,10 @@ class _SplashScreenState extends State<SplashScreen> {
         task: () async {
           // Precache key images so they don't flicker later
           if (mounted) {
-            await precacheImage(const AssetImage('assets/images/logo.png'), context);
+            await precacheImage(
+              const AssetImage('assets/images/logo.png'),
+              context,
+            );
           }
         },
       ),
@@ -71,11 +75,9 @@ class _SplashScreenState extends State<SplashScreen> {
     // Brief pause at 100% so the player sees the completed bar
     await Future.delayed(const Duration(milliseconds: 250));
 
-    if (!mounted) return;
-    // Navigate to your Main Menu / Home Screen
-    // Navigator.of(context).pushReplacement(
-    //   MaterialPageRoute(builder: (_) => const HomeScreen()),
-    // );
+    if (mounted) {
+      Navigator.pushReplacementNamed(context, AppRoutes.signInScreen);
+    }
   }
 
   @override
@@ -84,9 +86,11 @@ class _SplashScreenState extends State<SplashScreen> {
     final bool isLandscape = screenSize.width > screenSize.height;
 
     // Responsive dimensions with clamps so they look balanced on phones & tablets
-    final double logoWidth = (screenSize.width * (isLandscape ? 0.30 : 0.55)).clamp(150.0, 320.0);
+    final double logoWidth = (screenSize.width * (isLandscape ? 0.30 : 0.55))
+        .clamp(150.0, 320.0);
     final double logoHeight = (screenSize.height * 0.15).clamp(70.0, 150.0);
-    final double barWidth = (screenSize.width * (isLandscape ? 0.50 : 0.78)).clamp(220.0, 480.0);
+    final double barWidth = (screenSize.width * (isLandscape ? 0.50 : 0.78))
+        .clamp(220.0, 480.0);
     final double barHeight = (screenSize.height * 0.02).clamp(12.0, 20.0);
 
     return Scaffold(
@@ -114,7 +118,10 @@ class _SplashScreenState extends State<SplashScreen> {
                         _loadingStatus,
                         style: TextStyle(
                           color: AppColor.surfaceParchment,
-                          fontSize: (screenSize.width * 0.035).clamp(12.0, 16.0),
+                          fontSize: (screenSize.width * 0.035).clamp(
+                            12.0,
+                            16.0,
+                          ),
                           fontWeight: FontWeight.w600,
                           shadows: const [
                             Shadow(
@@ -145,10 +152,7 @@ class _SplashScreenState extends State<SplashScreen> {
       decoration: BoxDecoration(
         color: AppColor.surfaceParchment,
         borderRadius: BorderRadius.circular(height / 2),
-        border: Border.all(
-          color: AppColor.backgroundMid,
-          width: 2,
-        ),
+        border: Border.all(color: AppColor.backgroundMid, width: 2),
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular((height / 2) - 2),
@@ -162,9 +166,7 @@ class _SplashScreenState extends State<SplashScreen> {
             builder: (context, animatedValue, _) {
               return FractionallySizedBox(
                 widthFactor: animatedValue,
-                child: Container(
-                  color: AppColor.accentGold,
-                ),
+                child: Container(color: AppColor.accentGold),
               );
             },
           ),
@@ -175,7 +177,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Widget _gameLogo({required double width, required double height}) {
     return Image.asset(
-      'assets/images/logo.png',
+      'assets/images/ui_element/game_logo.png',
       width: width,
       height: height,
       fit: BoxFit.contain,
@@ -184,7 +186,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Widget _backgroundImage() {
     return Image.asset(
-      'assets/images/splash.png',
+      'assets/images/background/splash.png',
       fit: BoxFit.cover,
     );
   }
