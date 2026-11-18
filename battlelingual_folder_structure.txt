@@ -1,0 +1,145 @@
+battlelingual/
+│
+├── android/
+├── assets/
+│   ├── images/
+│   │   ├── characters/
+│   │   ├── enemies/
+│   │   ├── weapons/
+│   │   ├── maps/
+│   │   ├── backgrounds/
+│   │   ├── ui/
+│   │   └── effects/
+│   │
+│   ├── audio/
+│   │   ├── music/
+│   │   └── sfx/
+│   │
+│   ├── fonts/
+│   └── data/
+│       ├── characters/
+│       ├── enemies/
+│       ├── weapons/
+│       └── levels/
+│
+├── lib/
+│   │
+│   ├── main.dart
+│   │
+│   ├── app/
+│   │   ├── app.dart
+│   │   ├── routes/
+│   │   │   └── app_routes.dart
+│   │   └── theme/
+│   │       └── app_theme.dart
+│   │
+│   ├── core/
+│   │   ├── constants/
+│   │   │   ├── app_colors.dart
+│   │   │   ├── asset_paths.dart
+│   │   │   └── game_constants.dart
+│   │   │
+│   │   ├── components/
+│   │   │   ├── app_button.dart
+│   │   │   ├── app_panel.dart
+│   │   │   └── app_text.dart
+│   │   │
+│   │   ├── services/
+│   │   │   ├── audio_service.dart
+│   │   │   └── storage_service.dart
+│   │   │
+│   │   └── utils/
+│   │
+│   ├── features/
+│   │   |
+│   │   ├── authentication/
+│   │   │   ├── screens/
+│   │   │   └── widgets/
+│   │   │
+│   │   ├── lobby/
+│   │   │   ├── screens/
+│   │   │   │   └── lobby_screen.dart
+│   │   │   └── widgets/
+│   │   │       ├── player_profile.dart
+│   │   │       ├── character_preview.dart
+│   │   │       ├── coin_panel.dart
+│   │   │       └── lobby_menu.dart
+│   │   │
+│   │   ├── characters/
+│   │   │   ├── screens/
+│   │   │   │   └── character_selection_screen.dart
+│   │   │   ├── widgets/
+│   │   │   ├── models/
+│   │   │   └── data/
+│   │   │
+│   │   ├── inventory/
+│   │   │   ├── screens/
+│   │   │   ├── widgets/
+│   │   │   └── models/
+│   │   │
+│   │   ├── gameplay/
+│   │   │   │
+│   │   │   ├── game/
+│   │   │   │   ├── battlelingual_game.dart
+│   │   │   │   └── game_world.dart
+│   │   │   │
+│   │   │   ├── components/
+│   │   │   │   ├── player/
+│   │   │   │   │   ├── player.dart
+│   │   │   │   │   ├── player_movement.dart
+│   │   │   │   │   └── player_animation.dart
+│   │   │   │   │
+│   │   │   │   ├── enemies/
+│   │   │   │   │   ├── enemy.dart
+│   │   │   │   │   ├── enemy_ai.dart
+│   │   │   │   │   └── enemy_spawner.dart
+│   │   │   │   │
+│   │   │   │   ├── weapons/
+│   │   │   │   │   ├── weapon.dart
+│   │   │   │   │   ├── projectile.dart
+│   │   │   │   │   └── weapon_controller.dart
+│   │   │   │   │
+│   │   │   │   ├── map/
+│   │   │   │   │   ├── dungeon_map.dart
+│   │   │   │   │   ├── room.dart
+│   │   │   │   │   └── obstacles.dart
+│   │   │   │   │
+│   │   │   │   └── effects/
+│   │   │   │       ├── explosion.dart
+│   │   │   │       └── damage_effect.dart
+│   │   │   │
+│   │   │   ├── systems/
+│   │   │   │   ├── combat_system.dart
+│   │   │   │   ├── collision_system.dart
+│   │   │   │   ├── damage_system.dart
+│   │   │   │   └── spawn_system.dart
+│   │   │   │
+│   │   │   ├── controllers/
+│   │   │   │   ├── player_controller.dart
+│   │   │   │   └── game_controller.dart
+│   │   │   │
+│   │   │   ├── models/
+│   │   │   │   ├── game_state.dart
+│   │   │   │   ├── player_stats.dart
+│   │   │   │   └── enemy_stats.dart
+│   │   │   │
+│   │   │   ├── overlays/
+│   │   │   │   ├── game_hud.dart
+│   │   │   │   ├── pause_menu.dart
+│   │   │   │   └── game_over_menu.dart
+│   │   │   │
+│   │   │   └── screens/
+│   │   │       └── gameplay_screen.dart
+│   │   │
+│   │   ├── progression/
+│   │   │   ├── models/
+│   │   │   └── services/
+│   │   │
+│   │   └── settings/
+│   │       ├── screens/
+│   │       └── widgets/
+│   │
+│   └── shared/
+│       └── widgets/
+│
+└── pubspec.yaml
