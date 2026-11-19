@@ -1,6 +1,7 @@
 
 import 'package:battlelingual/core/components/app_text.dart';
 import 'package:battlelingual/core/constants/app_colors.dart';
+import 'package:battlelingual/core/utils/responsive_utils.dart';
 import 'package:flutter/material.dart';
 
 class SplashLoadingSection extends StatelessWidget {
@@ -21,19 +22,20 @@ class SplashLoadingSection extends StatelessWidget {
         AppText(
           text: status,
           color: AppColors.textPrimary,
+          fontSize: ResponsiveUtils.fontSize(context, 15),
         ),
 
-        const SizedBox(height: 10),
+        SizedBox(height: ResponsiveUtils.height(context, 10)),
 
         Container(
-          height: 14,
+          height: ResponsiveUtils.height(context, 13),
           width: double.infinity,
           decoration: BoxDecoration(
             color: AppColors.surfaceParchment,
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
               color: AppColors.backgroundMid,
-              width: 2,
+              width: ResponsiveUtils.width(context, 2),
             ),
           ),
           child: ClipRRect(

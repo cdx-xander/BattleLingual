@@ -1,5 +1,5 @@
-
 import 'package:battlelingual/core/constants/app_colors.dart';
+import 'package:battlelingual/core/utils/responsive_utils.dart';
 import 'package:flutter/material.dart';
 
 class AppPaintedPanel extends StatelessWidget {
@@ -8,21 +8,19 @@ class AppPaintedPanel extends StatelessWidget {
   final double? width;
   final double? height;
 
-  final double outerStroke;
-  final double innerStroke;
+  final double borderWidth;
   final double cornerLength;
 
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
 
   const AppPaintedPanel({
     super.key,
     this.child,
     this.width,
     this.height,
-    this.outerStroke = 3.0,
-    this.innerStroke = 1.5,
+    this.borderWidth = 3.0,
     this.cornerLength = 14.0,
-    this.padding = const EdgeInsets.all(8),
+    this.padding,
   });
 
   @override
@@ -32,12 +30,11 @@ class AppPaintedPanel extends StatelessWidget {
       height: height,
       child: CustomPaint(
         painter: _PanelPainter(
-          outerStroke: outerStroke,
-          innerStroke: innerStroke,
+          borderWidth: borderWidth,
           cornerLength: cornerLength,
         ),
         child: Padding(
-          padding: padding,
+          padding: padding ?? ResponsiveUtils.paddingAll(context, 10),
           child: child,
         ),
       ),
@@ -46,13 +43,11 @@ class AppPaintedPanel extends StatelessWidget {
 }
 
 class _PanelPainter extends CustomPainter {
-  final double outerStroke;
-  final double innerStroke;
+  final double borderWidth;
   final double cornerLength;
 
   const _PanelPainter({
-    required this.outerStroke,
-    required this.innerStroke,
+    required this.borderWidth,
     required this.cornerLength,
   });
 
@@ -91,39 +86,30 @@ class _PanelPainter extends CustomPainter {
 
     // Background gradient
     final bgPaint = Paint()
-      ..shader = const LinearGradient(
+      ..shader = LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors:AppColors.paintedBackgroundColor,
+        colors: AppColors.paintedBackgroundColor,
       ).createShader(rect);
 
     canvas.drawPath(path, bgPaint);
 
-    // Cyan inner border
-    final cyanPaint = Paint()
-      ..color = AppColors.buttonCyan
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = innerStroke;
-
-    canvas.drawPath(path, cyanPaint);
-
-    // Gold outer border
+    // Gold border
     final goldPaint = Paint()
-      ..shader = const LinearGradient(
+      ..shader = LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
         colors: AppColors.paintedBorderColor,
       ).createShader(rect)
       ..style = PaintingStyle.stroke
-      ..strokeWidth = outerStroke;
+      ..strokeWidth = borderWidth;
 
     canvas.drawPath(path, goldPaint);
   }
 
   @override
   bool shouldRepaint(covariant _PanelPainter oldDelegate) {
-    return outerStroke != oldDelegate.outerStroke ||
-        innerStroke != oldDelegate.innerStroke ||
+    return borderWidth != oldDelegate.borderWidth ||
         cornerLength != oldDelegate.cornerLength;
   }
 }

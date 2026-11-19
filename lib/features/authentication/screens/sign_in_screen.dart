@@ -1,4 +1,5 @@
 import 'package:battlelingual/app/routes/app_routes.dart';
+import 'package:battlelingual/core/utils/responsive_utils.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/sign_in_background.dart';
@@ -12,49 +13,43 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          final width = constraints.maxWidth;
-          final height = constraints.maxHeight;
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          // background
+          const SignInBackground(),
 
-          return Stack(
-            fit: StackFit.expand,
-            children: [
-              const SignInBackground(),
+          // game logo
+          Positioned(
+            top: ResponsiveUtils.height(context, 20),
+            left: 0,
+            right: 0,
+            height: ResponsiveUtils.height(context, 70),
+            child: const SignInLogo(),
+          ),
 
-              Positioned(
-                top: height * 0.02,
-                left: 0,
-                right: 0,
-                height: height * 0.15,
-                child: const SignInLogo(),
-              ),
+          // panel
+          Positioned(
+            top: ResponsiveUtils.height(context, 100),
+            left: ResponsiveUtils.width(context, 200),
+            right: ResponsiveUtils.width(context, 200),
+            height: ResponsiveUtils.height(context, 200),
+            child: const SignInPanel(),
+          ),
 
-              Positioned(
-                top: height * 0.22,
-                left: width * 0.25,
-                right: width * 0.25,
-                height: height * 0.50,
-                child: const SignInPanel(),
-              ),
-
-              Positioned(
-                bottom: height * 0.10,
-                left: width * 0.25,
-                right: width * 0.25,
-                height: height * 0.10,
-                child: GoogleSignInButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(
-                      context,
-                      AppRoutes.lobby,
-                    );
-                  },
-                ),
-              ),
-            ],
-          );
-        },
+          // button
+          Positioned(
+            left: ResponsiveUtils.width(context, 250),
+            right: ResponsiveUtils.width(context, 250),
+            height: ResponsiveUtils.height(context, 50),
+            bottom: ResponsiveUtils.height(context, 40),
+            child: GoogleSignInButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, AppRoutes.lobby);
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

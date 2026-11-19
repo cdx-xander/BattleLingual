@@ -1,12 +1,11 @@
-
 import 'package:flutter/material.dart';
 
 class AppImageButton extends StatefulWidget {
   final String imagePath;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final double? width;
   final double? height;
-  final double pressDepth;
+  final double pressScale;
 
   const AppImageButton({
     super.key,
@@ -14,7 +13,7 @@ class AppImageButton extends StatefulWidget {
     required this.onPressed,
     this.width,
     this.height,
-    this.pressDepth = 5,
+    this.pressScale = 0.94,
   });
 
   @override
@@ -25,14 +24,18 @@ class _AppImageButtonState extends State<AppImageButton> {
   bool _isPressed = false;
 
   void _onTapDown(TapDownDetails details) {
+    if (widget.onPressed == null) return;
     setState(() => _isPressed = true);
   }
 
   void _onTapUp(TapUpDetails details) {
+    if (!_isPressed) return;
     setState(() => _isPressed = false);
+    widget.onPressed?.call();
   }
 
   void _onTapCancel() {
+    if (!_isPressed) return;
     setState(() => _isPressed = false);
   }
 
@@ -42,15 +45,11 @@ class _AppImageButtonState extends State<AppImageButton> {
       onTapDown: _onTapDown,
       onTapUp: _onTapUp,
       onTapCancel: _onTapCancel,
-      onTap: widget.onPressed,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 80),
+      behavior: HitTestBehavior.opaque,
+      child: AnimatedScale(
+        scale: _isPressed ? widget.pressScale : 1.0,
+        duration: const Duration(milliseconds: 100),
         curve: Curves.easeOut,
-        transform: Matrix4.translationValues(
-          0,
-          _isPressed ? widget.pressDepth : 0,
-          0,
-        ),
         child: Image.asset(
           widget.imagePath,
           width: widget.width,

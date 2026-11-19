@@ -1,4 +1,3 @@
-
 import 'package:battlelingual/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +17,7 @@ class AppText extends StatelessWidget {
   final double? height;
 
   final List<Shadow>? shadows;
+  final TextDecoration decoration;
 
   const AppText({
     super.key,
@@ -32,6 +32,7 @@ class AppText extends StatelessWidget {
     this.letterSpacing,
     this.height,
     this.shadows,
+    this.decoration = TextDecoration.none,
   });
 
   @override
@@ -49,6 +50,7 @@ class AppText extends StatelessWidget {
         letterSpacing: letterSpacing,
         height: height,
         shadows: shadows,
+        decoration: decoration,
       ),
     );
   }

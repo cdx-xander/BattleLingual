@@ -1,6 +1,7 @@
 import 'package:battlelingual/core/components/app_painted_panel.dart';
 import 'package:battlelingual/core/components/app_text.dart';
 import 'package:battlelingual/core/constants/app_colors.dart';
+import 'package:battlelingual/core/utils/responsive_utils.dart';
 import 'package:flutter/material.dart';
 
 class SignInPanel extends StatelessWidget {
@@ -8,64 +9,56 @@ class SignInPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final width = constraints.maxWidth;
-        final height = constraints.maxHeight;
-
         return AppPaintedPanel(
-          outerStroke: 3,
-          innerStroke: 1,
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Stack(
-              children: [
-                Positioned(
-                  top: height * 0.05,
-                  left: 0,
-                  right: 0,
-                  height: height * 0.25,
-                  child: FittedBox(
-                    fit: BoxFit.contain,
-                    child: AppText(
-                      text: 'Welcome, Adventurer!',
-                      color: AppColors.accentGold,
-                      fontWeight: FontWeight.bold,
-                    ),
+          padding: ResponsiveUtils.paddingOnly(context, top: 10, left: 10, right: 10,bottom: 10),
+          borderWidth: ResponsiveUtils.width(context, 3),
+          
+          cornerLength: ResponsiveUtils.width(context, 20),
+          child: Stack(
+            children: [
+          
+          
+              Positioned(
+                top: 0,
+                left: ResponsiveUtils.width(context, 40),
+                right: ResponsiveUtils.width(context, 40),
+                child: AppText(
+                  text: 'Welcome, Adventurer!',
+                  color: AppColors.accentGold,
+                  fontWeight: FontWeight.bold,
+                  fontSize: ResponsiveUtils.fontSize(context, 30),
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                ),
+              ),
+          
+              Positioned(
+                top: ResponsiveUtils.height(context, 50),
+                left: ResponsiveUtils.width(context, 40),
+                right: ResponsiveUtils.width(context, 40),
+                height: ResponsiveUtils.height(context, 2),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.accentGold,
                   ),
                 ),
-
-                Positioned(
-                  top: height * 0.40,
-                  left: width * 0.20,
-                  right: width * 0.20,
-                  height: 3,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.accentGold,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
+              ),
+          
+              Positioned(
+                top: ResponsiveUtils.height(context, 60),
+                left: ResponsiveUtils.width(context, 10),
+                right: ResponsiveUtils.width(context, 10),
+                child: AppText(
+                  text: 'Bind your journey to your Google account so your hard-earned vocabulary survives a reinstall or device change.',
+                  color: AppColors.textPrimary,
+                  fontSize: ResponsiveUtils.fontSize(context, 20),
+                  textAlign: TextAlign.center,
+                  maxLines: 4,
                 ),
-
-                Positioned(
-                  top: height * 0.50,
-                  left: width * 0.05,
-                  right: width * 0.05,
-                  height: height * 0.40,
-                  child: AppText(
-                    text: 'Bind your journey to your Google account so your hard-earned vocabulary survives a reinstall or device change.',
-                    color: AppColors.textPrimary,
-                    fontSize: width * 0.03,
-                    textAlign: TextAlign.center,
-                    maxLines: 4,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
-      },
-    );
+    
   }
 }

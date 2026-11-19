@@ -1,5 +1,7 @@
 
 import 'package:battlelingual/core/constants/asset_paths.dart';
+import 'package:battlelingual/core/utils/responsive_utils.dart';
+import 'package:battlelingual/features/looby/widgets/lobby_background.dart';
 import 'package:flutter/material.dart';
 
 
@@ -13,56 +15,35 @@ class LobbyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          final double parentWidth = constraints.maxWidth;
-          final double parentHeight = constraints.maxHeight;
 
           return Stack(
             children: [
               // BACKGROUND
-              Positioned.fill(
-                child: Image.asset(
-                  AssetPaths.lobbyBackground,
-                  fit: BoxFit.cover,
-                ),
-              ),
+              const LobbyBackground(),
 
               // PLAYER PROFILE
               Positioned(
-                left: parentWidth * 0.02,
-                right: parentWidth * 0.77,
-                top: parentHeight * 0.04,
-                height: parentHeight * 0.15,
-                child: LobbyPlayerProfile(
-                  parentWidth: parentWidth * 0.21,
-                  parentHeight: parentHeight * 0.15,
-                ),
+                top: ResponsiveUtils.height(context, 30),
+                left: ResponsiveUtils.width(context, 20),
+                width: ResponsiveUtils.width(context, 220),
+                height: ResponsiveUtils.height(context, 70),
+                child: LobbyPlayerProfile(username: 'Alexander',currentExp: 200,maxExp: 500,profileImage: AssetPaths.profileImage,),
               ),
 
               // CHARACTER STATS
               Positioned(
-                left: parentWidth * 0.02,
-                right: parentWidth * 0.77,
-                top: parentHeight * 0.25,
-                height: parentHeight * 0.4,
-                child: LobbyCharacterStats(
-                  parentWidth: parentWidth * 0.21,
-                  parentHeight: parentHeight * 0.4,
-                ),
+                top: ResponsiveUtils.height(context, 120),
+                left: ResponsiveUtils.width(context, 30),
+                width: ResponsiveUtils.width(context, 170),
+                height: ResponsiveUtils.height(context, 150),
+                child: Container(color: Colors.red, child: LobbyCharacterStats()),
               ),
 
-              // CURRENCY
-              LobbyCurrencySection(
-                parentWidth: parentWidth,
-                parentHeight: parentHeight,
-              ),
+              // // CURRENCY
+              // LobbyCurrencySection(coinAmount: '1000000000',gemAmount: '100',),
 
               // BUTTONS
               LobbyButtons(
-                parentWidth: parentWidth,
-                parentHeight: parentHeight,
                 onSettingsPressed: () {
                   // TODO: Navigate to settings
                 },
@@ -84,8 +65,6 @@ class LobbyScreen extends StatelessWidget {
               ),
             ],
           );
-        },
-      ),
-    );
+
   }
 }

@@ -1,19 +1,18 @@
-
 import 'package:battlelingual/core/constants/app_colors.dart';
-import 'package:flutter/material.dart'; 
+import 'package:battlelingual/core/utils/responsive_utils.dart';
+import 'package:flutter/material.dart';
 
-class AppPaintedButton extends StatelessWidget {
+class AppPaintedButton extends StatefulWidget {
   final Widget? child;
   final VoidCallback? onPressed;
 
   final double? width;
   final double? height;
 
-  final double outerStroke;
-  final double innerStroke;
+  final double borderWidth;
   final double cornerLength;
 
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
 
   const AppPaintedButton({
     super.key,
@@ -21,31 +20,58 @@ class AppPaintedButton extends StatelessWidget {
     this.onPressed,
     this.width,
     this.height,
-    this.outerStroke = 3.0,
-    this.innerStroke = 1.5,
+    this.borderWidth = 3.0,
     this.cornerLength = 14.0,
-    this.padding = const EdgeInsets.all(8),
+    this.padding,
   });
 
   @override
+  State<AppPaintedButton> createState() => _AppPaintedButtonState();
+}
+
+class _AppPaintedButtonState extends State<AppPaintedButton> {
+  bool _isPressed = false;
+
+  void _handleTapDown(TapDownDetails details) {
+    if (widget.onPressed == null) return;
+    setState(() => _isPressed = true);
+  }
+
+  void _handleTapUp(TapUpDetails details) {
+    if (!_isPressed) return;
+    setState(() => _isPressed = false);
+    widget.onPressed?.call();
+  }
+
+  void _handleTapCancel() {
+    if (!_isPressed) return;
+    setState(() => _isPressed = false);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: width,
-      height: height,
-      child: CustomPaint(
-        painter: _ButtonPainter(
-          outerStroke: outerStroke,
-          innerStroke: innerStroke,
-          cornerLength: cornerLength,
-        ),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: onPressed,
+    return GestureDetector(
+      onTapDown: _handleTapDown,
+      onTapUp: _handleTapUp,
+      onTapCancel: _handleTapCancel,
+      behavior: HitTestBehavior.opaque,
+      child: AnimatedScale(
+        scale: _isPressed ? 0.94 : 1.0,
+        duration: const Duration(milliseconds: 100),
+        curve: Curves.easeOut,
+        child: SizedBox(
+          width: widget.width,
+          height: widget.height,
+          child: CustomPaint(
+            painter: _ButtonPainter(
+              borderWidth: widget.borderWidth,
+              cornerLength: widget.cornerLength,
+            ),
             child: Padding(
-              padding: padding,
+              padding:
+                  widget.padding ?? ResponsiveUtils.paddingAll(context, 8),
               child: Center(
-                child: child,
+                child: widget.child,
               ),
             ),
           ),
@@ -56,13 +82,11 @@ class AppPaintedButton extends StatelessWidget {
 }
 
 class _ButtonPainter extends CustomPainter {
-  final double outerStroke;
-  final double innerStroke;
+  final double borderWidth;
   final double cornerLength;
 
   const _ButtonPainter({
-    required this.outerStroke,
-    required this.innerStroke,
+    required this.borderWidth,
     required this.cornerLength,
   });
 
@@ -101,7 +125,7 @@ class _ButtonPainter extends CustomPainter {
 
     // Background gradient
     final bgPaint = Paint()
-      ..shader = const LinearGradient(
+      ..shader = LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: AppColors.paintedBackgroundColor,
@@ -109,31 +133,22 @@ class _ButtonPainter extends CustomPainter {
 
     canvas.drawPath(path, bgPaint);
 
-    // Cyan inner border
-    final cyanPaint = Paint()
-      ..color = AppColors.buttonCyan
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = innerStroke;
-
-    canvas.drawPath(path, cyanPaint);
-
-    // Gold outer border
+    // Gold border
     final goldPaint = Paint()
-      ..shader = const LinearGradient(
+      ..shader = LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
         colors: AppColors.paintedBorderColor,
       ).createShader(rect)
       ..style = PaintingStyle.stroke
-      ..strokeWidth = outerStroke;
+      ..strokeWidth = borderWidth;
 
     canvas.drawPath(path, goldPaint);
   }
 
   @override
   bool shouldRepaint(covariant _ButtonPainter oldDelegate) {
-    return outerStroke != oldDelegate.outerStroke ||
-        innerStroke != oldDelegate.innerStroke ||
+    return borderWidth != oldDelegate.borderWidth ||
         cornerLength != oldDelegate.cornerLength;
   }
 }

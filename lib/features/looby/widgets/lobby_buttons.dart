@@ -1,10 +1,9 @@
-
+import 'package:battlelingual/core/components/app_image_button.dart';
+import 'package:battlelingual/core/constants/asset_paths.dart';
+import 'package:battlelingual/core/utils/responsive_utils.dart';
 import 'package:flutter/material.dart';
 
 class LobbyButtons extends StatelessWidget {
-  final double parentWidth;
-  final double parentHeight;
-
   final VoidCallback onSettingsPressed;
   final VoidCallback onShopPressed;
   final VoidCallback onAchievementsPressed;
@@ -14,8 +13,6 @@ class LobbyButtons extends StatelessWidget {
 
   const LobbyButtons({
     super.key,
-    required this.parentWidth,
-    required this.parentHeight,
     required this.onSettingsPressed,
     required this.onShopPressed,
     required this.onAchievementsPressed,
@@ -24,106 +21,76 @@ class LobbyButtons extends StatelessWidget {
     required this.onPlayPressed,
   });
 
-  Widget _button({
-    required String text,
-    required VoidCallback onPressed,
-  }) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF263B58),
-        foregroundColor: Colors.white,
-        side: const BorderSide(
-          color: Color(0xFFD6AD54),
-          width: 2,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
-      child: FittedBox(
-        fit: BoxFit.scaleDown,
-        child: Text(
-          text,
-          maxLines: 1,
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         // SETTINGS
         Positioned(
-          right: parentWidth * 0.05,
-          top: parentHeight * 0.04,
-          width: parentWidth * 0.03,
-          height: parentHeight * 0.08,
-          child: _button(
-            text: '⚙',
+          top: ResponsiveUtils.height(context, 20),
+          right: ResponsiveUtils.width(context, 30),
+          width: ResponsiveUtils.width(context, 25),
+          child: AppImageButton(
+            imagePath: AssetPaths.settingsButton,
             onPressed: onSettingsPressed,
           ),
         ),
 
         // SHOP
         Positioned(
-          right: parentWidth * 0.05,
-          bottom: parentHeight * 0.55,
-          width: parentWidth * 0.10,
-          height: parentHeight * 0.20,
-          child: _button(
-            text: 'Shop',
-            onPressed: onShopPressed,
+          top: ResponsiveUtils.height(context, 80),
+          right: ResponsiveUtils.width(context, 40),
+          width: ResponsiveUtils.width(context, 70),
+          child: AppImageButton(
+            imagePath: AssetPaths.shopButton,
+            onPressed: onSettingsPressed,
           ),
         ),
 
         // ACHIEVEMENTS
         Positioned(
-          right: parentWidth * 0.05,
-          bottom: parentHeight * 0.30,
-          width: parentWidth * 0.10,
-          height: parentHeight * 0.20,
-          child: _button(
-            text: 'Achievements',
-            onPressed: onAchievementsPressed,
+          top: ResponsiveUtils.height(context, 170),
+          right: ResponsiveUtils.width(context, 40),
+          width: ResponsiveUtils.width(context, 70),
+          child: AppImageButton(
+            imagePath: AssetPaths.achievementsButton,
+            onPressed: onSettingsPressed,
           ),
         ),
 
         // LIBRARY
         Positioned(
-          left: parentWidth * 0.30,
-          bottom: parentHeight * 0.05,
-          width: parentWidth * 0.12,
-          height: parentHeight * 0.18,
-          child: _button(
-            text: 'Library',
-            onPressed: onLibraryPressed,
+          left: ResponsiveUtils.width(context, 40),
+          bottom: ResponsiveUtils.height(context, 30),
+          width: ResponsiveUtils.width(context, 110),
+          child: AppImageButton(
+            imagePath: AssetPaths.libraryButton,
+            onPressed: onSettingsPressed,
           ),
         ),
 
         // UPGRADE
         Positioned(
-          left: parentWidth * 0.45,
-          bottom: parentHeight * 0.05,
-          width: parentWidth * 0.12,
-          height: parentHeight * 0.18,
-          child: _button(
-            text: 'Upgrade',
-            onPressed: onUpgradePressed,
+          left: 0,
+          right: 0,
+          bottom: ResponsiveUtils.height(context, 30),
+          height: ResponsiveUtils.height(context, 50),
+          child: Center(
+            child: AppImageButton(
+              imagePath: AssetPaths.upgradeButton,
+              onPressed: onSettingsPressed,
+            ),
           ),
         ),
 
         // PLAY
         Positioned(
-          left: parentWidth * 0.60,
-          bottom: parentHeight * 0.05,
-          width: parentWidth * 0.15,
-          height: parentHeight * 0.20,
-          child: _button(
-            text: 'PLAY',
-            onPressed: onPlayPressed,
+          right: ResponsiveUtils.width(context, 40),
+          bottom: ResponsiveUtils.height(context, 30),
+          width: ResponsiveUtils.width(context, 170),
+          child: AppImageButton(
+            imagePath: AssetPaths.playButton,
+            onPressed: onSettingsPressed,
           ),
         ),
       ],

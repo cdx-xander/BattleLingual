@@ -1,23 +1,32 @@
-
 import 'package:battlelingual/core/components/app_painted_panel.dart';
 import 'package:battlelingual/core/components/app_text.dart';
 import 'package:battlelingual/core/constants/app_colors.dart';
 import 'package:battlelingual/core/constants/asset_paths.dart';
+import 'package:battlelingual/core/utils/responsive_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-
 class LobbyCharacterStats extends StatelessWidget {
-  final double parentWidth;
-  final double parentHeight;
-
   final String characterName;
+
+  final double currentHealth;
+  final double maxHealth;
+
+  final double currentDefense;
+  final double maxDefense;
+
+  final double currentAttack;
+  final double maxAttack;
 
   const LobbyCharacterStats({
     super.key,
-    required this.parentWidth,
-    required this.parentHeight,
     this.characterName = 'Levi',
+    this.currentHealth = 250,
+    this.maxHealth = 500,
+    this.currentDefense = 250,
+    this.maxDefense = 500,
+    this.currentAttack = 250,
+    this.maxAttack = 500,
   });
 
   @override
@@ -25,51 +34,46 @@ class LobbyCharacterStats extends StatelessWidget {
     return Stack(
       children: [
         Positioned(
-          top: parentHeight * 0.15,
+          top: ResponsiveUtils.height(context, 30),
           bottom: 0,
           left: 0,
           right: 0,
           child: AppPaintedPanel(
-            cornerLength: parentHeight * 0.07,
-            outerStroke: parentHeight * 0.015,
+            cornerLength: ResponsiveUtils.height(context, 15),
+            borderWidth: ResponsiveUtils.height(context, 3),
             child: Padding(
-              padding: EdgeInsets.only(
-                top: parentHeight * 0.1,
-                left: parentWidth * 0.05,
-                right: parentWidth * 0.05,
-                bottom: parentHeight * 0.05,
-              ),
+              padding: ResponsiveUtils.paddingOnly(context,top: 1,bottom: 1,),
               child: Column(
                 children: [
                   Expanded(
                     child: _statRow(
                       text: 'Health',
-                      currentValue: 250,
-                      maxValue: 500,
+                      currentValue: currentHealth,
+                      maxValue: maxHealth,
                       color: Colors.red,
                       iconPath: AssetPaths.googleIcon,
                     ),
                   ),
 
-                  SizedBox(height: parentHeight * 0.02),
+                  SizedBox(height: ResponsiveUtils.height(context, 20) * 0.02),
 
                   Expanded(
                     child: _statRow(
                       text: 'Defense',
-                      currentValue: 250,
-                      maxValue: 500,
+                      currentValue: currentDefense,
+                      maxValue: maxDefense,
                       color: const Color(0xFF93D792),
                       iconPath: AssetPaths.googleIcon,
                     ),
                   ),
 
-                  SizedBox(height: parentHeight * 0.02),
+                  SizedBox(height: ResponsiveUtils.height(context, 20) * 0.02),
 
                   Expanded(
                     child: _statRow(
                       text: 'Attack',
-                      currentValue: 250,
-                      maxValue: 500,
+                      currentValue: currentAttack,
+                      maxValue: maxAttack,
                       color: const Color(0xFF7F36F4),
                       iconPath: AssetPaths.googleIcon,
                     ),
@@ -82,14 +86,15 @@ class LobbyCharacterStats extends StatelessWidget {
 
         Positioned(
           top: 0,
-          height: parentHeight * 0.2,
-          left: parentWidth * 0.1,
-          right: parentWidth * 0.1,
+          height: ResponsiveUtils.height(context, 40),
+          left: ResponsiveUtils.width(context, 20),
+          right: ResponsiveUtils.width(context, 20),
           child: AppPaintedPanel(
-            cornerLength: parentHeight * 0.07,
-            outerStroke: parentHeight * 0.015,
-            child: FittedBox(
-              child: AppText(text: characterName),
+            cornerLength: ResponsiveUtils.height(context, 15),
+            borderWidth: ResponsiveUtils.height(context, 3),
+            child: Center(
+              child: AppText(text: characterName,
+              fontSize: ResponsiveUtils.fontSize(context, 20),),
             ),
           ),
         ),

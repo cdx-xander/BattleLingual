@@ -1,4 +1,4 @@
-
+import 'package:battlelingual/core/constants/asset_paths.dart';
 import 'package:flutter/material.dart';
 
 class AppImagePanel extends StatelessWidget {
@@ -26,17 +26,14 @@ class AppImagePanel extends StatelessWidget {
     return SizedBox(
       width: width,
       height: height,
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(imagePath),
-            fit: fit,
+      child: Stack(
+        children: [
+          Image.asset(AssetPaths.coinPanel, fit: BoxFit.contain),
+          Padding(
+            padding: padding,
+            child: child,
           ),
-        ),
-        child: Padding(
-          padding: padding,
-          child: child,
-        ),
+        ],
       ),
     );
   }

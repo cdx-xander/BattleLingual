@@ -1,5 +1,5 @@
-
 import 'package:battlelingual/app/routes/app_routes.dart';
+import 'package:battlelingual/core/utils/responsive_utils.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/splash_background.dart';
@@ -33,9 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _loadMockApp() async {
     for (int i = 0; i < loadingMessages.length; i++) {
-      await Future.delayed(
-        const Duration(milliseconds: 600),
-      );
+      await Future.delayed(const Duration(milliseconds: 600));
 
       if (!mounted) return;
 
@@ -45,9 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
       });
     }
 
-    await Future.delayed(
-      const Duration(milliseconds: 500),
-    );
+    await Future.delayed(const Duration(milliseconds: 500));
 
     if (!mounted) return;
 
@@ -55,10 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _navigateAfterLoading() {
-    Navigator.pushReplacementNamed(
-      context,
-      AppRoutes.signIn,
-    );
+    Navigator.pushReplacementNamed(context, AppRoutes.signIn);
   }
 
   @override
@@ -67,36 +60,32 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Stack(
         fit: StackFit.expand,
         children: [
+
+          // game background
           const SplashBackground(),
 
           SafeArea(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final width = constraints.maxWidth;
-                final height = constraints.maxHeight;
+            child: Stack(
+              children: [
+                // game logo
+                Positioned(
+                  top: ResponsiveUtils.width(context, 15),
+                  left: 0,
+                  right: 0,
+                  height: ResponsiveUtils.height(context, 100),
+                  child: const SplashLogo(),
+                ),
 
-                return Stack(
-                  children: [
-                    Positioned(
-                      top: height * 0.10,
-                      left: 0,
-                      right: 0,
-                      height: height * 0.20,
-                      child: const SplashLogo(),
-                    ),
-
-                    Positioned(
-                      bottom: height * 0.05,
-                      left: width * 0.10,
-                      right: width * 0.10,
-                      child: SplashLoadingSection(
-                        progress: loadingProgress,
-                        status: loadingStatus,
-                      ),
-                    ),
-                  ],
-                );
-              },
+                Positioned(
+                  left: ResponsiveUtils.width(context, 50),
+                  right: ResponsiveUtils.width(context, 50),
+                  bottom: ResponsiveUtils.width(context, 10),
+                  child: SplashLoadingSection(
+                    progress: loadingProgress,
+                    status: loadingStatus,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
