@@ -10,6 +10,8 @@ class LobbyButtons extends StatelessWidget {
   final VoidCallback onLibraryPressed;
   final VoidCallback onUpgradePressed;
   final VoidCallback onPlayPressed;
+  final VoidCallback onLeftPressed;
+  final VoidCallback onRightPressed;
 
   const LobbyButtons({
     super.key,
@@ -19,6 +21,8 @@ class LobbyButtons extends StatelessWidget {
     required this.onLibraryPressed,
     required this.onUpgradePressed,
     required this.onPlayPressed,
+    required this.onLeftPressed,
+    required this.onRightPressed,
   });
 
   @override
@@ -91,6 +95,28 @@ class LobbyButtons extends StatelessWidget {
           child: AppImageButton(
             imagePath: AssetPaths.playButton,
             onPressed: onSettingsPressed,
+          ),
+        ),
+
+        // character left
+        Positioned(
+          left: ResponsiveUtils.width(context, 270),
+          bottom: ResponsiveUtils.height(context, 150),
+          width: ResponsiveUtils.width(context, 30),
+          child: AppImageButton(
+            imagePath: AssetPaths.arrowLeft,
+            onPressed: onLeftPressed,
+          ),
+        ),
+
+        // character right
+        Positioned(
+          right: ResponsiveUtils.width(context, 270),
+          bottom: ResponsiveUtils.height(context, 150),
+          width: ResponsiveUtils.width(context, 30),
+          child: AppImageButton(
+            imagePath: AssetPaths.arrowRight,
+            onPressed: onRightPressed,
           ),
         ),
       ],

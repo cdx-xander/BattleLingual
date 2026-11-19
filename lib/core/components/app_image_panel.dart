@@ -28,7 +28,7 @@ class AppImagePanel extends StatelessWidget {
       height: height,
       child: Stack(
         children: [
-          Image.asset(AssetPaths.coinPanel, fit: BoxFit.contain),
+          Image.asset(imagePath, fit: BoxFit.contain),
           Padding(
             padding: padding,
             child: child,

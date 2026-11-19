@@ -20,13 +20,13 @@ class LobbyCharacterStats extends StatelessWidget {
 
   const LobbyCharacterStats({
     super.key,
-    this.characterName = 'Levi',
-    this.currentHealth = 250,
-    this.maxHealth = 500,
-    this.currentDefense = 250,
-    this.maxDefense = 500,
-    this.currentAttack = 250,
-    this.maxAttack = 500,
+    required this.characterName,
+    required this.currentHealth,
+    required this.maxHealth,
+    required this.currentDefense,
+    required this.maxDefense,
+    required this.currentAttack,
+    required this.maxAttack,
   });
 
   @override
@@ -42,40 +42,48 @@ class LobbyCharacterStats extends StatelessWidget {
             cornerLength: ResponsiveUtils.height(context, 15),
             borderWidth: ResponsiveUtils.height(context, 3),
             child: Padding(
-              padding: ResponsiveUtils.paddingOnly(context,top: 1,bottom: 1,),
+              padding: ResponsiveUtils.paddingOnly(
+                context,
+                top: ResponsiveUtils.height(context, 5),
+                bottom: ResponsiveUtils.height(context, 1),
+                right: ResponsiveUtils.height(context, 4),
+              ),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  // HP
                   Expanded(
                     child: _statRow(
+                      context: context,
                       text: 'Health',
                       currentValue: currentHealth,
                       maxValue: maxHealth,
-                      color: Colors.red,
-                      iconPath: AssetPaths.googleIcon,
+                      color: AppColors.error,
+                      iconPath: AssetPaths.hpIcon,
                     ),
                   ),
 
-                  SizedBox(height: ResponsiveUtils.height(context, 20) * 0.02),
-
+                  // defense
                   Expanded(
                     child: _statRow(
+                      context: context,
                       text: 'Defense',
                       currentValue: currentDefense,
                       maxValue: maxDefense,
-                      color: const Color(0xFF93D792),
-                      iconPath: AssetPaths.googleIcon,
+                      color: AppColors.buttonBlueLight,
+                      iconPath: AssetPaths.shieldIcon,
                     ),
                   ),
 
-                  SizedBox(height: ResponsiveUtils.height(context, 20) * 0.02),
-
+                  // attack
                   Expanded(
                     child: _statRow(
+                      context: context,
                       text: 'Attack',
                       currentValue: currentAttack,
                       maxValue: maxAttack,
-                      color: const Color(0xFF7F36F4),
-                      iconPath: AssetPaths.googleIcon,
+                      color: AppColors.surfaceBorder,
+                      iconPath: AssetPaths.swordIcon,
                     ),
                   ),
                 ],
@@ -93,8 +101,10 @@ class LobbyCharacterStats extends StatelessWidget {
             cornerLength: ResponsiveUtils.height(context, 15),
             borderWidth: ResponsiveUtils.height(context, 3),
             child: Center(
-              child: AppText(text: characterName,
-              fontSize: ResponsiveUtils.fontSize(context, 20),),
+              child: AppText(
+                text: characterName,
+                fontSize: ResponsiveUtils.fontSize(context, 20),
+              ),
             ),
           ),
         ),
@@ -102,64 +112,60 @@ class LobbyCharacterStats extends StatelessWidget {
     );
   }
 
+  //  each value
   Widget _statRow({
     required String text,
     required double currentValue,
     required double maxValue,
     required Color color,
     required String iconPath,
+    required BuildContext context,
   }) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final double boxWidth = constraints.maxWidth;
-        final double boxHeight = constraints.maxHeight;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        // icons
+        SvgPicture.asset(iconPath, height: ResponsiveUtils.height(context, 30)),
 
-        return Row(
-          children: [
-            SvgPicture.asset(
-              iconPath,
-              height: boxHeight * 0.85,
-              width: boxHeight * 0.85,
-            ),
-
-            SizedBox(width: boxWidth * 0.04),
-
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
+        // value
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // text and number value
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    height: boxHeight * 0.55,
-                    width: double.infinity,
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      alignment: Alignment.centerLeft,
-                      child: AppText(text: text),
-                    ),
+                  AppText(
+                    text: text,
+                    fontSize: ResponsiveUtils.fontSize(context, 13),
                   ),
-
-                  SizedBox(height: boxHeight * 0.08),
-
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(
-                      boxHeight * 0.15,
-                    ),
-                    child: LinearProgressIndicator(
-                      minHeight: (boxHeight * 0.25).clamp(3.0, 14.0),
-                      color: color,
-                      backgroundColor: AppColors.surfaceParchment,
-                      value: maxValue > 0
-                          ? (currentValue / maxValue).clamp(0.0, 1.0)
-                          : 0,
-                    ),
+                  AppText(
+                    text: "$currentValue / $maxValue",
+                    fontSize: ResponsiveUtils.fontSize(context, 13),
                   ),
                 ],
               ),
-            ),
-          ],
-        );
-      },
+
+              // LinearProgress
+              ClipRRect(
+                borderRadius: BorderRadius.circular(
+                  ResponsiveUtils.height(context, 5),
+                ),
+                child: LinearProgressIndicator(
+                  minHeight: ResponsiveUtils.height(context, 5),
+                  color: color,
+                  backgroundColor: AppColors.textPrimary,
+                  value: maxValue > 0
+                      ? (currentValue / maxValue).clamp(0.0, 1.0)
+                      : 0,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

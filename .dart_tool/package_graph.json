@@ -9,7 +9,10 @@
       "dependencies": [
         "cupertino_icons",
         "flutter",
-        "flutter_svg"
+        "flutter_svg",
+        "get",
+        "path",
+        "sqflite"
       ],
       "devDependencies": [
         "flutter_lints",
@@ -39,6 +42,31 @@
         "stream_channel",
         "test_api",
         "vector_math"
+      ]
+    },
+    {
+      "name": "path",
+      "version": "1.9.1",
+      "dependencies": []
+    },
+    {
+      "name": "sqflite",
+      "version": "2.4.6",
+      "dependencies": [
+        "flutter",
+        "path",
+        "sqflite_android",
+        "sqflite_common",
+        "sqflite_darwin",
+        "sqflite_platform_interface"
+      ]
+    },
+    {
+      "name": "get",
+      "version": "4.7.3",
+      "dependencies": [
+        "flutter",
+        "web"
       ]
     },
     {
@@ -128,11 +156,6 @@
       ]
     },
     {
-      "name": "path",
-      "version": "1.9.1",
-      "dependencies": []
-    },
-    {
       "name": "matcher",
       "version": "0.12.20",
       "dependencies": [
@@ -157,6 +180,52 @@
         "string_scanner",
         "term_glyph"
       ]
+    },
+    {
+      "name": "sqflite_common",
+      "version": "2.5.17",
+      "dependencies": [
+        "meta",
+        "path",
+        "synchronized"
+      ]
+    },
+    {
+      "name": "sqflite_platform_interface",
+      "version": "2.4.4",
+      "dependencies": [
+        "flutter",
+        "meta",
+        "platform",
+        "plugin_platform_interface",
+        "sqflite_common"
+      ]
+    },
+    {
+      "name": "sqflite_darwin",
+      "version": "2.4.6",
+      "dependencies": [
+        "flutter",
+        "meta",
+        "path",
+        "sqflite_common",
+        "sqflite_platform_interface"
+      ]
+    },
+    {
+      "name": "sqflite_android",
+      "version": "2.4.6",
+      "dependencies": [
+        "flutter",
+        "path",
+        "sqflite_common",
+        "sqflite_platform_interface"
+      ]
+    },
+    {
+      "name": "web",
+      "version": "1.1.2",
+      "dependencies": []
     },
     {
       "name": "vector_graphics_compiler",
@@ -270,6 +339,25 @@
       ]
     },
     {
+      "name": "synchronized",
+      "version": "3.6.1+1",
+      "dependencies": []
+    },
+    {
+      "name": "plugin_platform_interface",
+      "version": "2.1.8",
+      "dependencies": [
+        "meta"
+      ]
+    },
+    {
+      "name": "platform",
+      "version": "3.2.0",
+      "dependencies": [
+        "meta"
+      ]
+    },
+    {
       "name": "xml",
       "version": "7.0.1",
       "dependencies": [
@@ -298,11 +386,6 @@
     {
       "name": "args",
       "version": "2.7.0",
-      "dependencies": []
-    },
-    {
-      "name": "web",
-      "version": "1.1.2",
       "dependencies": []
     },
     {

@@ -11,9 +11,9 @@ class AssetPaths {
 
   static const String googleIcon = 'assets/images/icons/google_logo.svg';
   static const String profileImage = 'assets/images/icons/sample_user.png';
-  static const String hpIcon = 'assets/images/icons/sample_user.png';
-  static const String shieldIcon = 'assets/images/icons/sample_user.png';
-  static const String swordIcon = 'assets/images/icons/sample_user.png';
+  static const String hpIcon = 'assets/images/icons/heart_icon.svg';
+  static const String shieldIcon = 'assets/images/icons/shield_icon.svg';
+  static const String swordIcon = 'assets/images/icons/sword_icon.svg';
 
   // UI
 
@@ -26,4 +26,15 @@ class AssetPaths {
   static const String libraryButton = 'assets/images/ui_elements/library_btn.png';
   static const String coinPanel = 'assets/images/ui_elements/coin_panel.png';
   static const String gemPanel = 'assets/images/ui_elements/gem_panel.png';
+  static const String arrowLeft = 'assets/images/ui_elements/arrow_left.png';
+  static const String arrowRight = 'assets/images/ui_elements/arrow_right.png';
+
+
+
+  // Characters
+  static const String Borin = 'assets/images/characters/Borin.png';
+  static const String Freya = 'assets/images/characters/Freya.png';
+  static const String Levi = 'assets/images/characters/Levi.png';
+  static const String Lyra = 'assets/images/characters/Lyra.png';
+
 }

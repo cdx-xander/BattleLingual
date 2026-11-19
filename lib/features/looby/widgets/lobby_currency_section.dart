@@ -16,31 +16,26 @@ class LobbyCurrencySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.widthOf(context);
-    final double screenHeight = MediaQuery.widthOf(context);
-    return Stack(
+    return Row(
       children: [
-        Positioned(
-          top: screenHeight * 0.01,
-          right: screenWidth * 0.1,
-          width: ResponsiveUtils.width(context, 100),
-          child: Container(
-            color: Colors.red,
-            child: AppImagePanel(
-              imagePath: AssetPaths.coinPanel,
-              padding: ResponsiveUtils.paddingOnly(context, left: 27, top: 6),
-              child: SizedBox(
-                child: AppText(
-                  text: coinAmount,
-                  fontSize: ResponsiveUtils.fontSize(context, 15),
-                  maxLines: 1,
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ),
-          ),
-        ),
+        _currencyPanel(context, coinAmount,AssetPaths.coinPanel),
+        SizedBox(width: ResponsiveUtils.width(context, 10)),
+        _currencyPanel(context, gemAmount, AssetPaths.gemPanel),
       ],
     );
+  }
+
+  Widget _currencyPanel(BuildContext context, amount ,imagePath) {
+    return AppImagePanel(
+        imagePath: imagePath,
+        fit: BoxFit.contain,
+        padding: ResponsiveUtils.paddingOnly(context, left: 34, top: 12, bottom: 11),
+        child: AppText(
+          text: amount,
+          fontSize: ResponsiveUtils.fontSize(context, 12),
+          maxLines: 1,
+          textAlign: TextAlign.center,
+        ),
+      );
   }
 }
