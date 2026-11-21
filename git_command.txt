@@ -1,0 +1,43 @@
+# --- STARTING & DOWNLOADING ---
+
+# Download a repository from GitHub onto your computer
+git clone https://github.com/cdx-xander/BattleLingual.git
+
+# Download only the latest version (faster, good for large repos or slow internet)
+git clone --depth 1 https://github.com/cdx-xander/BattleLingual.git
+
+# Initialize a brand new local Git repository in your current folder
+git init
+
+
+# --- CHECKING STATUS & HISTORY ---
+
+# Check which files have been modified, added, or deleted
+git status
+
+# View the history of all commits
+git log --oneline
+
+
+# --- SAVING & UPLOADING CHANGES ---
+
+# Stage all changed files so they are ready to be saved
+git add .
+
+# Save your staged changes with a descriptive message
+git commit -m "Describe your changes here"
+
+# Upload your saved commits to GitHub
+git push origin main
+
+# Download the latest changes from GitHub and merge them into your local files
+git pull origin main
+
+
+# --- BRANCHING ---
+
+# Create a new branch and switch to it immediately
+git checkout -b new-feature-name
+
+# Switch back to an existing branch
+git checkout main
